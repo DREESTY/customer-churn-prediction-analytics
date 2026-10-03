@@ -1,0 +1,13 @@
+{
+  "best_model": "Logistic Regression",
+  "rows_used_for_modeling": 7032,
+  "test_rows": 1407,
+  "metrics": {
+    "model": "Logistic Regression",
+    "accuracy": 0.8038379530916845,
+    "precision": 0.6484848484848484,
+    "recall": 0.5721925133689839,
+    "f1": 0.6079545454545454,
+    "roc_auc": 0.8359290473207676
+  }
+}
