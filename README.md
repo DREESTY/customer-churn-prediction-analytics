@@ -1,173 +1,186 @@
 # Customer Churn Prediction & Retention Analytics
 
-An end-to-end data analytics and machine learning project that identifies customer churn drivers, predicts churn risk, segments customers, and translates model outputs into retention strategies through Power BI.
+An end-to-end **Data Analytics, Machine Learning, SQL, and Business Intelligence project** that analyzes customer churn, identifies key churn drivers, predicts individual customer churn probability, segments customers based on retention risk and customer value, estimates revenue exposure, and translates analytical results into actionable retention strategies.
 
-## Business Problem
+The project follows a complete analytics workflow:
 
-Customer churn reduces recurring revenue and increases the pressure to acquire replacement customers. The goal of this project is to answer:
+**Raw Data → Data Cleaning → Exploratory Analysis → Machine Learning → Customer Risk Scoring → SQL Analytics → Power BI → Retention Strategy → Executive Recommendations**
 
-1. Which customer characteristics are associated with churn?
-2. Which customers have the highest predicted churn risk?
-3. Which customer segments should a retention team prioritize?
-4. What retention action can be associated with each risk/segment?
+---
 
-## Tech Stack
+## 📌 Table of Contents
 
-- Python
-- Pandas / NumPy
-- Scikit-learn
-- Matplotlib / Seaborn
-- SQL
-- Power BI + DAX
-- Git / GitHub
+- [Project Overview](#-project-overview)
+- [Business Problem](#-business-problem)
+- [Business Objectives](#-business-objectives)
+- [Project Approach](#-project-approach)
+- [Dataset](#-dataset)
+- [Data Preparation](#-data-preparation)
+- [Exploratory Data Analysis](#-exploratory-data-analysis)
+- [Machine Learning](#-machine-learning)
+- [Customer Risk Segmentation](#-customer-risk-segmentation)
+- [Customer Value Segmentation](#-customer-value-segmentation)
+- [SQL Analytics](#-sql-analytics)
+- [Power BI Dashboard](#-power-bi-dashboard)
+  - [Page 1 - Customer Churn & Retention Analytics](#page-1---customer-churn--retention-analytics)
+  - <img width="1206" height="680" alt="Screenshot 2026-10-03 203241" src="https://github.com/user-attachments/assets/df04e30c-0028-4e4c-9a18-e3821bc7a3f6" />
 
-## Dataset
+  - [Page 2 - Customer Risk Analysis](#page-2---customer-risk-analysis)
+  - <img width="1207" height="676" alt="Screenshot 2026-10-03 203320" src="https://github.com/user-attachments/assets/a42fcfc7-3675-47ce-a878-321acad944d9" />
 
-This project uses the IBM Telco Customer Churn dataset containing 7,043 customer records and 21 columns. The target is `Churn` (Yes/No).
+  - [Page 3 - Customer Retention Strategy](#page-3---customer-retention-strategy)
+  - <img width="1444" height="811" alt="Screenshot 2026-10-03 203405" src="https://github.com/user-attachments/assets/94d287d3-77f3-4d81-a553-5fb5e5a133b1" />
 
-Download the dataset and place it at:
+  - [Page 4 - Executive Recommendations](#page-4---executive-recommendations)
+  - <img width="1441" height="815" alt="Screenshot 2026-10-03 203435" src="https://github.com/user-attachments/assets/edf99867-624f-435f-8a6a-5f13598d8d7f" />
 
-`data/raw/Telco-Customer-Churn.csv`
+- [End-to-End Business Flow](#-end-to-end-business-flow)
+- [Key Business Insights](#-key-business-insights)
+- [Project Structure](#-project-structure)
+- [Setup](#-setup)
+- [Running the Project](#-running-the-project)
+- [Power BI Report](#-power-bi-report)
+- [Limitations](#-limitations)
+- [Future Improvements](#-future-improvements)
+- [Resume Version](#-resume-version)
 
-A public IBM repository provides the same dataset and sample workflow:
-https://github.com/IBM/telco-customer-churn-on-icp4d
+---
 
-An alternative Kaggle listing is:
-https://www.kaggle.com/datasets/blastchar/telco-customer-churn
+# 📌 Project Overview
 
-## Project Workflow
+Customer churn is an important business problem because losing existing customers can reduce recurring revenue and increase the cost of acquiring replacement customers.
 
-Raw data
-→ cleaning
-→ exploratory analysis
-→ feature engineering
-→ train/test split
-→ classification models
-→ model evaluation
-→ customer churn probability
-→ risk segmentation
-→ retention strategy mapping
-→ Power BI dashboard
+This project develops an end-to-end customer churn analytics solution using the **IBM Telco Customer Churn dataset**.
 
-## Folder Structure
+Instead of stopping at simply predicting whether a customer will churn, the project extends the analysis into a business-oriented retention framework.
+
+The project:
+
+1. Analyzes historical customer behavior.
+2. Identifies patterns associated with customer churn.
+3. Builds machine learning models to predict customer churn probability.
+4. Generates an individual churn probability for each customer.
+5. Segments customers into Low, Medium, and High risk bands.
+6. Combines churn risk with customer value.
+7. Identifies high-risk and high-value customers.
+8. Estimates potential revenue exposure.
+9. Uses SQL to generate business-level analytical metrics.
+10. Builds an interactive four-page Power BI dashboard.
+11. Maps customer segments to retention actions.
+12. Summarizes the analysis into executive-level recommendations.
+
+The final solution connects **technical machine learning outputs with business decision-making**.
+
+---
+
+# 💼 Business Problem
+
+A telecommunications company may have thousands of customers, but not every customer has the same probability of leaving.
+
+A useful churn analytics system should therefore answer more than:
+
+> "Who is going to churn?"
+
+It should also help answer:
+
+- Why are certain customer groups experiencing higher churn?
+- Which customers have elevated predicted churn probability?
+- Which high-risk customers have greater customer value?
+- How much revenue is associated with customers at risk?
+- Which customers should receive different types of retention attention?
+- What patterns should business teams investigate further?
+
+This project addresses these questions by combining **descriptive analytics, predictive analytics, segmentation, and business intelligence**.
+
+---
+
+# 🎯 Business Objectives
+
+The project was designed around the following objectives:
+
+### 1. Understand Customer Churn
+
+Analyze historical churn patterns across:
+
+- Contract type
+- Tenure
+- Internet service
+- Payment method
+- Monthly charges
+- Customer characteristics
+
+### 2. Predict Customer Churn
+
+Build classification models that estimate the probability of a customer churning.
+
+### 3. Identify High-Risk Customers
+
+Use predicted churn probabilities to classify customers into different risk segments.
+
+### 4. Incorporate Customer Value
+
+Combine churn risk with customer value so that retention analysis considers both:
+
+- Probability of churn
+- Potential business value
+
+### 5. Estimate Revenue Exposure
+
+Estimate the amount of revenue associated with high-risk customers.
+
+### 6. Develop Retention Strategies
+
+Map different customer risk/value segments to potential retention actions.
+
+### 7. Communicate Insights
+
+Create a Power BI dashboard that allows business users to understand:
+
+- What is happening?
+- Which customers are at risk?
+- Which segments require attention?
+- What actions could be considered?
+
+---
+
+# 🔄 Project Approach
+
+The complete project follows the pipeline below:
 
 ```text
-Customer-Churn-Prediction/
-│
-├── data/
-│   ├── raw/
-│   │   └── Telco-Customer-Churn.csv
-│   └── processed/
-│       └── churn_scored_customers.csv
-│
-├── models/
-│   └── churn_model.joblib
-│
-├── notebooks/
-│   └── Customer_Churn_Analysis.ipynb
-│
-├── outputs/
-│   └── figures/
-│
-├── powerbi/
-│   └── POWER_BI_BUILD_GUIDE.md
-│
-├── sql/
-│   └── churn_analysis.sql
-│
-├── src/
-│   ├── train_model.py
-│   └── make_eda.py
-│
-├── docs/
-│   └── DATA_DICTIONARY.md
-│
-├── requirements.txt
-└── README.md
-```
-
-## Setup
-
-```bash
-git clone <your-repository-url>
-cd Customer-Churn-Prediction
-
-python -m venv .venv
-.venv\Scripts\activate
-
-pip install -r requirements.txt
-```
-
-Then place the CSV in `data/raw/`.
-
-## Run the Project
-
-### 1. Generate EDA figures
-
-```bash
-python src/make_eda.py
-```
-
-### 2. Train the model and score customers
-
-```bash
-python src/train_model.py
-```
-
-The script creates:
-
-- model evaluation metrics
-- confusion matrix
-- ROC curve
-- feature importance
-- `data/processed/churn_scored_customers.csv`
-- `models/churn_model.joblib`
-
-## Important: Do Not Fabricate Metrics
-
-After running the pipeline, copy the actual Accuracy, Precision, Recall, F1 and ROC-AUC values into the final report/README. Do not use example metrics from another repository.
-
-## Power BI
-
-Open Power BI Desktop and import:
-
-`data/processed/churn_scored_customers.csv`
-
-Build the three pages described in:
-
-`powerbi/POWER_BI_BUILD_GUIDE.md`
-
-Recommended pages:
-
-1. Churn Overview
-2. High-Risk Customers
-3. Retention Strategy
-
-## Key Business Outputs
-
-The final dashboard should make it possible to identify:
-
-- overall churn rate
-- churn by contract type
-- churn by tenure
-- churn by internet service
-- churn by payment method
-- high-risk customers
-- high-value customers at risk
-- expected monthly revenue exposure
-- recommended retention action
-
-## Limitations
-
-- This is a public historical dataset, not live customer data.
-- Churn predictions indicate statistical risk, not causal reasons for leaving.
-- The dataset does not contain every real-world retention signal such as detailed complaints, call-center history or customer satisfaction.
-- Retention recommendations are business rules layered on top of model outputs and should be validated experimentally.
-
-## Resume Version
-
-**Customer Churn Prediction & Retention Analytics | Python, SQL, Scikit-learn, Power BI**
-- Analyzed customer behavioral and demographic data to identify churn drivers and high-risk segments.
-- Built a classification pipeline to predict customer churn risk and translated model outputs into customer segmentation and retention strategies through an interactive Power BI dashboard.
-
-Replace/add quantified results only after you run the model and have verified the metrics.
+                    RAW CUSTOMER DATA
+                           │
+                           ▼
+                DATA CLEANING & PREPARATION
+                           │
+                           ▼
+                EXPLORATORY DATA ANALYSIS
+                           │
+                           ▼
+                  FEATURE ENGINEERING
+                           │
+                           ▼
+                  MACHINE LEARNING
+                           │
+                           ▼
+              CUSTOMER CHURN PROBABILITY
+                           │
+                           ▼
+                  RISK SEGMENTATION
+                           │
+                           ▼
+                CUSTOMER VALUE BANDING
+                           │
+                           ▼
+                    SQL ANALYTICS
+                           │
+                           ▼
+                  POWER BI DASHBOARD
+                           │
+              ┌────────────┼────────────┐
+              ▼            ▼            ▼
+        CHURN OVERVIEW   CUSTOMER     RETENTION
+                          RISK         STRATEGY
+              │
+              ▼
+        EXECUTIVE RECOMMENDATIONS
